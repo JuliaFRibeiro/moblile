@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.Random;
 
 public class MyGdxGame extends ApplicationAdapter {
-
+//aplicando variaveis
 	Texture img;
 	private SpriteBatch batch;
 	private Texture[] passaros;
@@ -63,7 +63,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private final float VIRTUAL_WIDTH = 720;
-	private final float VIRTUAL_HEIGH = 1280;
+	private final float VIRTUAL_HEIGHT = 1280;
 
 
 	@Override
@@ -84,16 +84,16 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 	private void inicializarTexturas (){
-	passaros = new Texture[3];
-	passaros[0] = new Texture("passaro1.png");
-	passaros[1] = new Texture("passaro2.png");
-	passaros[2] = new Texture("passaro3.png");
+		passaros = new Texture[3];
+		passaros[0] = new Texture("passaro1.png");
+		passaros[1] = new Texture("passaro2.png");
+		passaros[2] = new Texture("passaro3.png");
 
-	fundo = new Texture("fundo.png");
-	canoBaixo = new Texture("cano_baixo_maior.png");
-	canoTopo = new Texture("cano_topo_maior.png");
-	gameOver = new Texture("game_over.png");
-}
+		fundo = new Texture("fundo.png");
+		canoBaixo = new Texture("cano_baixo_maior.png");
+		canoTopo = new Texture("cano_topo_maior.png");
+		gameOver = new Texture("game_over.png");
+	}
 
 	private void inicializaObjetos(){
 
@@ -101,7 +101,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		random = new Random();
 
 		larguraDispositivo = VIRTUAL_WIDTH;
-		alturaDispositivo = VIRTUAL_WIDTH;
+		alturaDispositivo = VIRTUAL_HEIGHT;
 		posicaoInicialVerticalPassaro = alturaDispositivo / 2;
 		posicaoCanoHorizontal = larguraDispositivo;
 		espacoEntreCanos = 350;
@@ -131,8 +131,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		pontuacaoMaxima = preferencias.getInteger("pontuacaoMaxima",0);
 
 		camera = new OrthographicCamera();
-		camera.position.set(VIRTUAL_WIDTH/2, VIRTUAL_HEIGH/2,0);
-		viewport = new StretchViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGH, camera);
+		camera.position.set(VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2,0);
+		viewport = new StretchViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
 	}
 
 	private void verificarEstadoJogo(){
@@ -149,7 +149,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				gravidade = -15;
 				somVoando .play();
 			}
-			posicaoCanoHorizontal -= Gdx.graphics.getDeltaTime() + 200;
+			posicaoCanoHorizontal -= Gdx.graphics.getDeltaTime() * 200;
 			if( posicaoCanoHorizontal < -canoTopo.getWidth() ){
 				posicaoCanoHorizontal = larguraDispositivo;
 				posicaoCanoVertical = random.nextInt(400) - 200;
@@ -165,7 +165,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				preferencias.putInteger("pontuacaoMaxima", pontuacaoMaxima);
 				preferencias.flush();
 			}
-			posicaoHorizontalPassaro = Gdx.graphics.getDeltaTime() * +500;
+			posicaoHorizontalPassaro = Gdx.graphics.getDeltaTime() * 500;
 			if(toqueTela) {
 				estadoJogo = 0;
 				pontos = 0;
@@ -224,8 +224,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				alturaDispositivo -110 );
 
 		if( estadoJogo == 2 ){
-				batch.draw(gameOver, larguraDispositivo / 2 - gameOver.getWidth()/2,
-						alturaDispositivo / 2 );
+				batch.draw(gameOver, larguraDispositivo / 2 - gameOver.getWidth()/2, alturaDispositivo / 2 );
 		textoReiniciar.draw(batch,
 				"Toque para reiniciar!", larguraDispositivo/2 -140,
 				alturaDispositivo/2 - gameOver.getHeight()/2 );
@@ -235,7 +234,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		batch.end();
 	}
-
+//aplicando pontuaçao
 	public void validarPontos(){
 
 		if( posicaoCanoHorizontal < 50-passaros[0].getWidth() ) {
@@ -252,7 +251,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			variacao = 0;
 		}
 	}
-
+//
 	@Override
 	public void resize(int width, int height){
 		viewport.update(width, height);
