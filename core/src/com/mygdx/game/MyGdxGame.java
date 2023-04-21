@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class MyGdxGame extends ApplicationAdapter {
 
-	Texture img;
+	//variaveis
 	private SpriteBatch batch;
 	private Texture[] passaros;
 	private Texture fundo;
