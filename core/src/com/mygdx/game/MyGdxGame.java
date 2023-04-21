@@ -66,12 +66,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	private final float VIRTUAL_HEIGH = 1280;
 
 
+	//inicializa aplicaçao
 	@Override
 	public void create() {
 		inicializarTexturas();
 		inicializaObjetos();
 	}
 
+	//atualisa os dados
 	@Override
 	public void render() {
 
@@ -82,7 +84,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		desenharTexturas();
 		detectarColisoes();
 	}
-
+	
+	//chama os assests
 	private void inicializarTexturas (){
 	passaros = new Texture[3];
 	passaros[0] = new Texture("passaro1.png");
@@ -95,46 +98,56 @@ public class MyGdxGame extends ApplicationAdapter {
 	gameOver = new Texture("game_over.png");
 }
 
+	//instanciando objetos
 	private void inicializaObjetos(){
 
 		batch = new SpriteBatch();
 		random = new Random();
 
+		//ajusta tamanho da tela
 		larguraDispositivo = VIRTUAL_WIDTH;
 		alturaDispositivo = VIRTUAL_WIDTH;
 		posicaoInicialVerticalPassaro = alturaDispositivo / 2;
 		posicaoCanoHorizontal = larguraDispositivo;
 		espacoEntreCanos = 350;
 
+		//define a pontuação
 		textoPontuacao = new BitmapFont();
 		textoPontuacao.setColor(Color.WHITE);
 		textoPontuacao.getData().setScale(10);
 
+		//define o texto de reiniciar
 		textoReiniciar = new BitmapFont();
 		textoReiniciar.setColor(Color.GREEN);
 		textoReiniciar .getData().setScale(2);
 
+		//define o texto de melhor pontuaçao
 		textoMelhorPontuacao = new BitmapFont();
 		textoMelhorPontuacao.setColor(Color.RED) ;
 		textoMelhorPontuacao.getData().setScale(2);
 
+		//colocando colisores
 		shapeRenderer = new ShapeRenderer();
 		circuloPassaro = new Circle();
 		retanguloCanoBaixo = new Rectangle();
 		retanguloCanoCima = new Rectangle();
 
+		//colocando sons no jogo
 		somVoando = Gdx.audio.newSound( Gdx.files.internal("som_asa.wav") );
 		somColisao = Gdx.audio.newSound( Gdx.files.internal("som_batida.wav") );
 		somPontuacao = Gdx.audio.newSound( Gdx.files.internal("som_pontos.wav") );
 
+		//hud
 		preferencias = Gdx.app.getPreferences("flappyBird");
 		pontuacaoMaxima = preferencias.getInteger("pontuacaoMaxima",0);
-
+		
+		//ativando camera
 		camera = new OrthographicCamera();
 		camera.position.set(VIRTUAL_WIDTH/2, VIRTUAL_HEIGH/2,0);
 		viewport = new StretchViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGH, camera);
 	}
 
+	//maquina de estado
 	private void verificarEstadoJogo(){
 
 		boolean toqueTela = Gdx.input.justTouched();
@@ -179,6 +192,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	}
 
+	// metodo de detectar colisaoes
 	private void detectarColisoes(){
 		circuloPassaro.set(
 				50 + posicaoHorizontalPassaro + passaros[0].getWidth() / 2,
@@ -210,6 +224,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 	}
 
+	
+	//posicionando texturas
 	private void desenharTexturas(){
 		batch.setProjectionMatrix( camera.combined );
 		batch.begin();
@@ -236,6 +252,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.end();
 	}
 
+	//fazendo a pontuaçao funcionar
 	public void validarPontos(){
 
 		if( posicaoCanoHorizontal < 50-passaros[0].getWidth() ) {
@@ -253,6 +270,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 	}
 
+	//redimencionando tela
 	@Override
 	public void resize(int width, int height){
 		viewport.update(width, height);
