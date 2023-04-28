@@ -24,7 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 //aplicando variaveis
 	Texture img;
 	private SpriteBatch batch;
-	private Texture[] passaros;
+	private Texture[] sonic;
 	private Texture fundo;
 	private Texture canoBaixo;
 	private Texture canoTopo;
@@ -84,12 +84,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 	private void inicializarTexturas (){
-		passaros = new Texture[3];
-		passaros[0] = new Texture("passaro1.png");
-		passaros[1] = new Texture("passaro2.png");
-		passaros[2] = new Texture("passaro3.png");
+		sonic = new Texture[3];
+		sonic[0] = new Texture("sonic1.png");
+		sonic[1] = new Texture("sonic2.png");
+		sonic[2] = new Texture("sonic3.png");
 
-		fundo = new Texture("fundo.png");
+		fundo = new Texture("fundo_sonic.png");
 		canoBaixo = new Texture("cano_baixo_maior.png");
 		canoTopo = new Texture("cano_topo_maior.png");
 		gameOver = new Texture("game_over.png");
@@ -181,9 +181,9 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private void detectarColisoes(){
 		circuloPassaro.set(
-				50 + posicaoHorizontalPassaro + passaros[0].getWidth() / 2,
-				posicaoInicialVerticalPassaro + passaros[0].getHeight() / 2,
-				passaros[0] .getWidth() / 2
+				50 + posicaoHorizontalPassaro + sonic[0].getWidth() / 2,
+				posicaoInicialVerticalPassaro + sonic[0].getHeight() / 2,
+				sonic[0] .getWidth() / 2
 
 		);
 
@@ -214,7 +214,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.setProjectionMatrix( camera.combined );
 		batch.begin();
 		batch.draw(fundo, 0,0,larguraDispositivo, alturaDispositivo);
-		batch.draw( passaros[ (int) variacao] ,
+		batch.draw( sonic[ (int) variacao] ,
 				50 + posicaoHorizontalPassaro, posicaoInicialVerticalPassaro);
 		batch.draw(canoBaixo, posicaoCanoHorizontal,
 				alturaDispositivo / 2 - canoBaixo.getHeight() - espacoEntreCanos/2 + posicaoCanoVertical);
@@ -237,7 +237,7 @@ public class MyGdxGame extends ApplicationAdapter {
 //aplicando pontuaçao
 	public void validarPontos(){
 
-		if( posicaoCanoHorizontal < 50-passaros[0].getWidth() ) {
+		if( posicaoCanoHorizontal < 50-sonic[0].getWidth() ) {
 			if (!passouCano) {
 				pontos++;
 				passouCano = true;
