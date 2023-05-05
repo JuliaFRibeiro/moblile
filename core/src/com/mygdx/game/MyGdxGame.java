@@ -29,9 +29,13 @@ public class MyGdxGame extends ApplicationAdapter {
 	private Texture canoBaixo;
 	private Texture canoTopo;
 	private Texture gameOver;
+	private Texture moedaOuro;
+	private Texture moedaPrata;
 
 	private ShapeRenderer shapeRenderer;
 	private Circle circuloPassaro;
+	private Circle circuloMoedaOuro;
+	private Circle circuloMoedaPrata;
 	private Rectangle retanguloCanoCima;
 	private Rectangle retanguloCanoBaixo;
 
@@ -42,6 +46,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	private float posicaoInicialVerticalPassaro;
 	private float posicaoCanoHorizontal;
 	private float posicaoCanoVertical;
+	private float posicaoMoedaOuroHorizontal;
+	private float posicaoMoedaOuroVertical;
+	private float posicaoMoedaPrataHorizontal;
+	private float posicaoMoedaPrataVertical;
 	private float espacoEntreCanos;
 	private Random random;
 	private int pontos = 0;
@@ -90,9 +98,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		sonic[2] = new Texture("sonic3.png");
 
 		fundo = new Texture("fundo_sonic.png");
-		canoBaixo = new Texture("cano_baixo_maior.png");
-		canoTopo = new Texture("cano_topo_maior.png");
+		canoBaixo = new Texture("c_baixo_maior.png");
+		canoTopo = new Texture("c_topo_maior.png");
 		gameOver = new Texture("game_over.png");
+		moedaOuro = new Texture("moeda_ouro.png");
+		moedaPrata = new Texture("moeda_prata.png");
 	}
 
 	private void inicializaObjetos(){
@@ -120,6 +130,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		shapeRenderer = new ShapeRenderer();
 		circuloPassaro = new Circle();
+		circuloMoedaOuro = new Circle();
+		circuloMoedaPrata = new Circle();
 		retanguloCanoBaixo = new Rectangle();
 		retanguloCanoCima = new Rectangle();
 
@@ -184,6 +196,22 @@ public class MyGdxGame extends ApplicationAdapter {
 				50 + posicaoHorizontalPassaro + sonic[0].getWidth() / 2,
 				posicaoInicialVerticalPassaro + sonic[0].getHeight() / 2,
 				sonic[0] .getWidth() / 2
+
+		);
+
+		circuloMoedaOuro.set(
+				posicaoMoedaOuroHorizontal+moedaOuro.getWidth()/2,
+				alturaDispositivo / 2 + moedaOuro.getHeight()/2 + posicaoMoedaOuroVertical,
+				moedaOuro.getHeight()/2
+
+
+		);
+
+		circuloMoedaPrata.set(
+				posicaoMoedaPrataHorizontal+moedaPrata.getWidth()/2,
+				alturaDispositivo / 2 + moedaPrata.getHeight()/2 + posicaoMoedaPrataVertical,
+				moedaPrata.getHeight()/2
+
 
 		);
 
